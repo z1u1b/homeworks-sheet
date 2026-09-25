@@ -1,0 +1,36 @@
+# Шаблон systemd-юнита для постоянного запуска бота на сервере.
+#
+# Как поставить (один раз, на сервере, после git pull):
+#   1. Скопировать этот файл в /etc/systemd/system/homeworks-bot.service:
+#        sudo cp deploy/homeworks-bot.service /etc/systemd/system/homeworks-bot.service
+#   2. Открыть его и заменить <ЗАМЕНИТЕ...> на свои значения (см. комментарии
+#      ниже) — либо отредактировать прямо в /etc/systemd/system/, либо здесь
+#      в репозитории перед копированием.
+#   3. sudo systemctl daemon-reload
+#   4. sudo systemctl enable homeworks-bot   # автозапуск при старте сервера
+#   5. sudo systemctl start homeworks-bot
+#
+# После каждого git pull с изменениями в коде — просто:
+#   sudo systemctl restart homeworks-bot
+#
+# Полезные команды:
+#   sudo systemctl status homeworks-bot   # жив ли процесс
+#   journalctl -u homeworks-bot -f        # логи в реальном времени
+
+[Unit]
+Description=Homeworks Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+# Пользователь, от которого запускать бота (НЕ root).
+User=<ЗАМЕНИТЕ_НА_СВОЕГО_ПОЛЬЗОВАТЕЛЯ>
+# Абсолютный путь до папки с репозиторием на сервере.
+WorkingDirectory=<ЗАМЕНИТЕ_НА_ПУТЬ_ДО_ПРОЕКТА>
+# Путь до python3 внутри venv этого проекта (см. README, раздел установки).
+ExecStart=<ЗАМЕНИТЕ_НА_ПУТЬ_ДО_ПРОЕКТА>/venv/bin/python3 main.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

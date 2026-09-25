@@ -1,0 +1,63 @@
+# Секреты и локальные настройки
+.env
+.env.*
+!.env.example
+credentials.json
+*.key
+*.pem
+
+# База данных
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+env/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+.fuse_hidden*
+
+# Логи и временные файлы
+*.log
+logs/
+*.tmp
+tmp/
